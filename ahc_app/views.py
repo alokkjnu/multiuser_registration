@@ -1,5 +1,11 @@
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+from django.db import IntegrityError
+from django.contrib.auth import login, logout, authenticate
+
 
 class SignUpView(TemplateView):
     template_name = 'registration/signup.html'
@@ -7,15 +13,15 @@ class SignUpView(TemplateView):
 
 def home(request):
     if request.user.is_authenticated:
-        if request.User.is_super_client:
-            return redirect('teachers:quiz_change_list')
-        elif request.User.is_client:
-            return redirect('students:quiz_list')
-        elif request.User.is_broker:
-            return redirect('students:quiz_list')
+        if request.user.is_super_client:
+            return redirect('ahc_app:dashboard')
+        elif request.user.is_client:
+            return redirect('ahc_app:dashboard2')
+        elif request.user.is_broker:
+            return redirect('ahc_app:dashboard3')
         else:
-            return redirect('students:quiz_list')
-    return render(request, 'classroom/home.html')
+            return redirect('login')
+    return render(request, 'ahc_app/index4.html')
 
 
 
@@ -30,15 +36,17 @@ def home(request):
 # # Create your views here.
 #
 def index(request):
-    return render(request, 'ahc_app/index4.html')
+    return render(request, 'ahc_app/index.html')
 
 
 def dashboard(request):
     return render(request, 'ahc_app/index.html')
 #
 #
-# def dashboard2(request):
-#     return render(request, 'ahc_app/index2.html')
+def dashboard2(request):
+    return render(request, 'ahc_app/index2.html')
+def dashboard3(request):
+    return render(request, 'ahc_app/index3.html')
 #
 def user_login(request):
     return render(request, 'ahc_app/pages/forms/login-v2.html')
@@ -93,3 +101,28 @@ def user_login(request):
 #             print("error")
 
 
+def loginuser(request):
+    if request.method == 'GET':
+        return render(request, 'registration/login.html', {'form': AuthenticationForm()})
+    else:
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        if user is None:
+            return render(request, 'registration/login.html',
+                          {'form': AuthenticationForm(), 'error': 'Username or Password did not match'})
+        else:
+            login(request, user)
+            if request.user.is_authenticated:
+                if request.user.is_super_client:
+                    return redirect('ahc_app:dashboard')
+                elif request.user.is_client:
+                    return redirect('ahc_app:dashboard2')
+                elif request.user.is_broker:
+                    return redirect('ahc_app:dashboard3')
+                else:
+                    return redirect('login')
+            return redirect('ahc_app:dashboard')
+
+def logoutuser(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('ahc_app:home')

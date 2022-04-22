@@ -84,6 +84,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
+                <a href="{% url 'loginuser' %}"></a>
               <img src="{% static "dist/img/user1-128x128.jpg"%}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
@@ -188,9 +189,16 @@
         <div class="image">
           <img src="{% static "dist/img/user2-160x160.jpg"%}" class="img-circle elevation-2" alt="User Image">
         </div>
+          {% if user.is_authenticated %}
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ user.username }}</a>
         </div>
+          <form action="{% url 'logoutuser' %}" method="post">
+       {% csrf_token %}
+        <button type="submit">Logout</button>
+
+          </form>
+          {% endif %}
       </div>
 
       <!-- SidebarSearch Form -->
