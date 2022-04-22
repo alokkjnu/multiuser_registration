@@ -9,10 +9,12 @@ class ClientSignUpForm(UserCreationForm):
     last_name = forms.CharField(max_length=32, help_text='Last name')
     email = forms.EmailField(max_length=64,
                              help_text='Enter a valid email address')
+    mobile_number = forms.IntegerField(
+        help_text='Enter a valid mobile number')
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email',)
+        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email', 'mobile_number',)
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -23,8 +25,16 @@ class ClientSignUpForm(UserCreationForm):
 
 
 class SuperClientSignUpForm(UserCreationForm):
+    first_name = forms.CharField(max_length=32, help_text='First name')
+    last_name = forms.CharField(max_length=32, help_text='Last name')
+    email = forms.EmailField(max_length=64,
+                             help_text='Enter a valid email address')
+    mobile_number = forms.IntegerField(
+        help_text='Enter a valid mobile number')
+
     class Meta(UserCreationForm.Meta):
         model = User
+        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email', 'mobile_number',)
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -35,8 +45,16 @@ class SuperClientSignUpForm(UserCreationForm):
 
 
 class BrokerSignUpForm(UserCreationForm):
+    first_name = forms.CharField(max_length=32, help_text='First name')
+    last_name = forms.CharField(max_length=32, help_text='Last name')
+    email = forms.EmailField(max_length=64,
+                             help_text='Enter a valid email address')
+    mobile_number = forms.IntegerField(
+        help_text='Enter a valid mobile number')
+
     class Meta(UserCreationForm.Meta):
         model = User
+        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email', 'mobile_number',)
 
     def save(self, commit=True):
         user = super().save(commit=False)

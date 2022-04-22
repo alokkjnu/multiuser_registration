@@ -105,7 +105,7 @@ def loginuser(request):
     if request.method == 'GET':
         return render(request, 'registration/login.html', {'form': AuthenticationForm()})
     else:
-        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        user = authenticate(request, email=request.POST['email'], password=request.POST['password'])
         if user is None:
             return render(request, 'registration/login.html',
                           {'form': AuthenticationForm(), 'error': 'Username or Password did not match'})
@@ -125,4 +125,4 @@ def loginuser(request):
 def logoutuser(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('ahc_app:home')
+        return redirect('ahc_app')
