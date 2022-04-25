@@ -271,7 +271,26 @@
             </a>
 
           </li>
-          {% endif %}
+          <li class="nav-item">
+            <a href="{% url 'ahc_super_client:client_profile'%}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Client Details
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'ahc_super_client:broker_profile'%}" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Broker Details
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+
+          </li>
+          {% else %}
           <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -875,6 +894,7 @@
             </a>
           </li>
         </ul>
+        {% endif %}
       </nav>
       <!-- /.sidebar-menu -->
     </div>

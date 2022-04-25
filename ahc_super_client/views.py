@@ -26,6 +26,14 @@ def client_list(request):
     return render(request, 'ahc_app/pages/tables/client_list.html')
 
 
+def client_profile(request):
+    return render(request, 'ahc_app/pages/profile/client_profile.html')
+
+
+def broker_profile(request):
+    return render(request, 'ahc_app/pages/profile/broker_profile.html')
+
+
 class SuperClientSignUpView(CreateView):
     model = User
     form_class = SuperClientSignUpForm
