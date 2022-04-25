@@ -12,8 +12,19 @@ from ahc_app.decorators import broker_required
 from ahc_app.forms import SuperClientSignUpForm
 from ahc_app.models import User
 
+
 def index(request):
-    return render(request, 'ahc_app/index4.html')
+    # return render(request, 'ahc_app/pages/forms/add_client.html')
+    return render(request, 'ahc_app/index.html')
+
+
+def add_client(request):
+    return render(request, 'ahc_app/pages/forms/add_client.html')
+
+
+def client_list(request):
+    return render(request, 'ahc_app/pages/tables/client_list.html')
+
 
 class SuperClientSignUpView(CreateView):
     model = User
@@ -27,4 +38,4 @@ class SuperClientSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('teachers:quiz_change_list')
+        return redirect('home')

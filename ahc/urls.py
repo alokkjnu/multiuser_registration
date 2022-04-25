@@ -24,6 +24,7 @@ from ahc_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ahc_app.urls')),
+    path('super_client/', include(('ahc_super_client.urls','ahc_super_client'), namespace='ahc_super_client')),
     # path('accounts/', include('django.contrib.auth.urls')),
     path('login/', views.loginuser, name='loginuser'),
     path('logout/', views.logoutuser, name='logoutuser'),

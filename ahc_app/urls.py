@@ -5,7 +5,8 @@ app_name = "ahc_app"
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('super_client/', include(('ahc_super_client.urls','ahc_super_client'), namespace='ahc_super_client')),
+    #path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard2/', views.dashboard2, name='dashboard2'),
     path('dashboard3/', views.dashboard3, name='dashboard3'),
     #path('login/', views.user_login, name='user_login'),
