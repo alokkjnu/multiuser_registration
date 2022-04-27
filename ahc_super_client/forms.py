@@ -16,6 +16,8 @@ class AddClientForm(UserCreationForm):
                                 widget=forms.TextInput(attrs={'placeholder': 'Password'}))
     password2 = forms.CharField(max_length=32, help_text='Retype Password',
                                 widget=forms.TextInput(attrs={'placeholder': 'Retype Password'}))
+    # end_date = forms.DateField(help_text='End Date',
+    #                             widget=forms.TextInput(attrs={'placeholder': 'End Date'}))
 
     class Meta(UserCreationForm.Meta):
         model = User
